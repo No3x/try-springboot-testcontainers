@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @SpringBootTest(classes = TrySpringbootTestcontainersApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 class PersonControllerMockMvcTest extends DatabaseTestBase {
@@ -23,8 +24,8 @@ class PersonControllerMockMvcTest extends DatabaseTestBase {
     void whenRequestingPersons_thenReturnPersons() throws Exception {
          mvc.perform(get("/persons"))
                  .andExpect(status().isOk())
-                 .andExpect(jsonPath("$[0].name").value("John"))
-                 .andExpect(jsonPath("$[0].projects[*].name").value(hasItem("projectA")));
+                 .andExpect(jsonPath("content[0].name").value("John"))
+                 .andExpect(jsonPath("content[0].projects[*].name").value(hasItem("projectA")));
     }
 
 }
