@@ -1,4 +1,4 @@
-package de.no3x.tryspringboottestcontainers.controller;
+package de.no3x.tryspringboottestcontainers.controller.person;
 
 import de.no3x.tryspringboottestcontainers.TrySpringbootTestcontainersApplication;
 import de.no3x.tryspringboottestcontainers.tests.DatabaseTestBase;
@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,8 +23,7 @@ class PersonControllerMockMvcTest extends DatabaseTestBase {
     void whenRequestingPersons_thenReturnPersons() throws Exception {
          mvc.perform(get("/persons"))
                  .andExpect(status().isOk())
-                 .andExpect(jsonPath("content[0].name").value("John"))
-                 .andExpect(jsonPath("content[0].projects[*].name").value(hasItem("projectA")));
+                 .andExpect(jsonPath("content[0].name").value("John"));
     }
 
 }

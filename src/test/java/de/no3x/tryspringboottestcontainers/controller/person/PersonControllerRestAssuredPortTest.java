@@ -1,4 +1,4 @@
-package de.no3x.tryspringboottestcontainers.controller;
+package de.no3x.tryspringboottestcontainers.controller.person;
 
 import de.no3x.tryspringboottestcontainers.TrySpringbootTestcontainersApplication;
 import de.no3x.tryspringboottestcontainers.tests.DatabaseTestBase;

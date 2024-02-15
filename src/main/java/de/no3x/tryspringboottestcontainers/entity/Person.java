@@ -22,9 +22,9 @@ public class Person {
 
     @ManyToMany
     @JoinTable(
-            name = "personprojects",
-            joinColumns = @JoinColumn(name = "personId"),
-            inverseJoinColumns = @JoinColumn(name = "projectId")
+            name = "project_persons",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
     )
     private Set<Project> projects;
 }

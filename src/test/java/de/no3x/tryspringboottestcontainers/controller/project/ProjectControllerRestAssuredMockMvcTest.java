@@ -1,4 +1,4 @@
-package de.no3x.tryspringboottestcontainers.controller;
+package de.no3x.tryspringboottestcontainers.controller.project;
 
 import de.no3x.tryspringboottestcontainers.tests.DatabaseTestBase;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
@@ -9,11 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.context.WebApplicationContext;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.when;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
-class PersonControllerRestAssuredMockMvcTest extends DatabaseTestBase {
+class ProjectControllerRestAssuredMockMvcTest extends DatabaseTestBase {
 
     @Autowired
     private WebApplicationContext context;
@@ -24,10 +23,17 @@ class PersonControllerRestAssuredMockMvcTest extends DatabaseTestBase {
     }
 
     @Test
-    void whenRequestingPersons_thenReturnPersons() {
-        when().get("/persons")
+    void whenRequestingProjects_thenReturnPersons() {
+        when().get("/projects")
                 .then().statusCode(200)
-                .and().body("content[0].name", is("John"))
-                .and().body("content[0].projects.name", hasItem("projectA"));
+                .and().body("content", hasSize(1))
+                .and().body("content[0].name", is("projectA"));
+    }
+
+    @Test
+    void whenRequestingProjectPersons_thenReturnPersons() {
+        when().get("/projects/1/persons")
+                .then().statusCode(200)
+                .and().body("content", hasSize(2));
     }
 }
